@@ -72,6 +72,87 @@ $b->tampilWarna();
 ```
 
 
+Lalu Muncul sebagai berikut:
+
+
+![File_Mobil](img/mobile.png)
+
+
 
 ## 4). Membuat File Form
 
+Selangjutnaya adalah membuat file baru dengan nama form.php lalu masukan coding berikut:
+
+
+```php
+<?php
+/** Nama Class : Form
+ * Deskripsi : Class untuk membuat form inputan text sederhana
+ */
+
+class Form
+{
+    private $fields = array();
+    private $action;
+    private $submit ="Submit Form";
+    private $jumField = 0;
+
+    public function __construct($action, $submit)
+    {
+        $this->action = $action;
+        $this->submit = $submit;
+    }
+
+    public function displayForm()
+    {
+        echo "<form action='".$this->action."' method='POST'>";
+        echo '<table width="100%" border="0">';
+        for ($j=0; $j<count($this->fields); $j++) {
+            echo "<tr><td align='right'>".$this->fields[$j]['label']."</td>";
+            echo "<td><input type='text' name='".$this->fields[$j]['name']."'></td></tr>";
+        }
+        echo "<tr><td colspan='2'>";
+        echo "<input type='submit' value='".$this->submit."'></td></tr>";
+        echo "</table>";
+    }
+
+    public function addField($name, $label)
+    {
+        $this->fields [$this->jumField]['name'] = $name;
+        $this->fields [$this->jumField]['label'] = $label;
+        $this->jumField ++;
+    }
+}
+?>
+```
+
+
+
+## 5). Membuat Inputan
+
+Lalu dilanjutkan dengan membuat inputan yang akan tersedia pada form.php. Masukan coding berikut:
+
+
+```php
+<?php
+/** Program Memanfaatkan Program 10.2 untuk membuat form inputan sederhana. */
+
+include "form.php";
+
+echo "<html><head><title>Mahasiswa</title></head></html><body>";
+$form = new Form("", "Input Form");
+$form->addField("txtnim", "Nim");
+$form->addField("txtnama", "Nama");
+$form->addField("txtalamat", "Alamat");
+echo "<h3>Silahkan Isi Form Berikut Ini: </h3>";
+$form->displayForm();
+echo "</body></html>";
+
+?>
+```
+
+
+Lalu akan muncul format sebagai berikut:
+
+
+![Form_Inputan](img/form_input.png)
